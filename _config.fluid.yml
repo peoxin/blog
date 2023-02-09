@@ -793,7 +793,7 @@ valine:
   appKey: ioR17mMEcARPJNbt00J4oVyi
   path: window.location.pathname
   placeholder:
-  avatar: 'retro'
+  avatar: 'hide'
   meta: ['nick', 'mail', 'link']
   requiredFields: []
   pageSize: 10
