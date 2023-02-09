@@ -4,5 +4,5 @@ date: {{ date }}
 categories:
 tags:
 index_img: 
-excerpt: 
+excerpt: ''
 ---
