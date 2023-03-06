@@ -4,6 +4,33 @@
   
   
   <entry>
+    <title>Numpy 矩阵求逆</title>
+    <link href="/blog/2023/03/06/Numpy-%E7%9F%A9%E9%98%B5%E6%B1%82%E9%80%86/"/>
+    <url>/blog/2023/03/06/Numpy-%E7%9F%A9%E9%98%B5%E6%B1%82%E9%80%86/</url>
+    
+    <content type="html"><![CDATA[<p>在 Numpy 中，对于 <code>ndarray</code> 和 <code>matrix</code> 对象，求解逆矩阵的方法不同。</p><h2 id="numpy-ndarray"><a href="#numpy-ndarray" class="headerlink" title="numpy.ndarray"></a>numpy.ndarray</h2><p>矩阵求逆：<code>numpy.linalg.inv()</code></p><p>对于 <code>ndarray</code> 对象，求解逆矩阵不能使用 <code>A**(-1)</code>，其结果是对矩阵 A 中的每个元素求倒数。</p><p>矩阵求伪逆：<code>numpy.linalg.pinv()</code></p><blockquote><p>矩阵 A 的伪逆（pseudo-inverse）为：$(A^TA)^{-1}A^T$</p></blockquote><h2 id="numpy-matrix"><a href="#numpy-matrix" class="headerlink" title="numpy.matrix"></a>numpy.matrix</h2><p>矩阵求逆有三种方法：</p><ul><li><p><code>numpy.linalg.inv()</code></p></li><li><p><code>A.I</code></p></li><li><p><code>A**(-1)</code></p></li></ul><p>矩阵求伪逆：<code>numpy.linalg.pinv()</code></p>]]></content>
+    
+    
+    <categories>
+      
+      <category>python</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>python</tag>
+      
+      <tag>numpy</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Arch Linux 安装流程</title>
     <link href="/blog/2023/02/09/Arch%20Linux%20%E5%AE%89%E8%A3%85%E6%B5%81%E7%A8%8B/"/>
     <url>/blog/2023/02/09/Arch%20Linux%20%E5%AE%89%E8%A3%85%E6%B5%81%E7%A8%8B/</url>

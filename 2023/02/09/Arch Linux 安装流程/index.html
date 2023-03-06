@@ -24,7 +24,7 @@
 <meta property="og:description" content="Arch Linux 的安装流程，主要参考 Arch Linux 官方文档 Installation guide - ArchWiki。 1 安装前准备1.1 下载安装镜像在 Arch Linux 清华源，下载安装镜像 archlinux-version-x86_64.iso。 1.2 验证签名（可选）在下载安装镜像的相同网址，下载 PGP 签名文件 archlinux-version-x86_6">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-09T10:23:54.000Z">
-<meta property="article:modified_time" content="2023-02-09T12:39:34.922Z">
+<meta property="article:modified_time" content="2023-03-06T17:44:10.197Z">
 <meta property="article:author" content="peoxin">
 <meta property="article:tag" content="linux">
 <meta property="article:tag" content="arch">
@@ -487,7 +487,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年2月9日</div>
+          <div>2023年3月7日</div>
         </div>
       
       
@@ -517,6 +517,12 @@
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/blog/2023/03/06/Numpy-%E7%9F%A9%E9%98%B5%E6%B1%82%E9%80%86/" title="Numpy 矩阵求逆">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Numpy 矩阵求逆</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
@@ -611,6 +617,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -842,6 +854,49 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
 
   <script defer src="/blog/js/leancloud.js" ></script>
 
