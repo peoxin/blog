@@ -4,7 +4,6 @@ date: 2023-03-07 01:03:38
 categories:
   - python
 tags:
-  - python
   - numpy
 index_img:
 excerpt: ''

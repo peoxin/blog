@@ -4,7 +4,6 @@ date: 2023-02-09 18:23:54
 categories:
   - linux
 tags:
-  - linux
   - arch
 index_img:
 excerpt: ''

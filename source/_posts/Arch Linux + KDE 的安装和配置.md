@@ -4,11 +4,14 @@ date: 2022-05-02 02:07:54
 categories:
   - linux
 tags:
-  - linux
   - kde
 index_img: 
-excerpt: 本文记录了Arch Linux + KDE 的安装和配置流程，方便自己今后查阅，也提供给大家作为参考
+excerpt: 本文记录了 Arch Linux + KDE 的安装和配置流程，方便自己今后查阅，也提供给大家作为参考
 ---
+
+{% note warning %}
+此教程版本较旧，尚未更新。建议对照 Arch Linux 官方文档进行阅读！
+{% endnote %}
 
 如果遇到任何问题，请优先查阅Arch Linux官方文档[ArchWiki](https://wiki.archlinux.org/)。
 
