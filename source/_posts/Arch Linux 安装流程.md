@@ -147,6 +147,7 @@ arch-chroot /mnt
 
 ```shell
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+timedatectl set-ntp true
 hwclock --systohc
 ```
 
