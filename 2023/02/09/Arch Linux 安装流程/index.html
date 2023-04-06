@@ -24,7 +24,7 @@
 <meta property="og:description" content="Arch Linux 的安装流程，主要参考 Arch Linux 官方文档 Installation guide - ArchWiki。 1 安装前准备1.1 下载安装镜像在 Arch Linux 清华源，下载安装镜像 archlinux-version-x86_64.iso。 1.2 验证签名（可选）在下载安装镜像的相同网址，下载 PGP 签名文件 archlinux-version-x86_6">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-02-09T10:23:54.000Z">
-<meta property="article:modified_time" content="2023-03-12T16:56:18.432Z">
+<meta property="article:modified_time" content="2023-04-06T15:57:44.281Z">
 <meta property="article:author" content="peoxin">
 <meta property="article:tag" content="arch">
 <meta name="twitter:card" content="summary_large_image">
@@ -375,7 +375,7 @@
 
 <h3 id="3-2-Chroot"><a href="#3-2-Chroot" class="headerlink" title="3.2 Chroot"></a>3.2 Chroot</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">arch-chroot /mnt<br></code></pre></td></tr></table></figure>
 
-<h3 id="3-3-设置时区"><a href="#3-3-设置时区" class="headerlink" title="3.3 设置时区"></a>3.3 设置时区</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime<br>hwclock --systohc<br></code></pre></td></tr></table></figure>
+<h3 id="3-3-设置时区"><a href="#3-3-设置时区" class="headerlink" title="3.3 设置时区"></a>3.3 设置时区</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs shell">ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime<br>timedatectl set-ntp true<br>hwclock --systohc<br></code></pre></td></tr></table></figure>
 
 <h3 id="3-4-本地化设置"><a href="#3-4-本地化设置" class="headerlink" title="3.4 本地化设置"></a>3.4 本地化设置</h3><p>首先安装 <code>vim</code>。</p>
 <p>在 <code>/etc/locale.gen</code> 文件中，将 <code>en_US.UTF-8 UTF-8</code> 和 <code>zh_CN.UTF-8 UTF-8</code> 取消注释。然后执行 <code>locale-gen</code> 命令。</p>
@@ -484,7 +484,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>更新于</div>
-          <div>2023年3月13日</div>
+          <div>2023年4月6日</div>
         </div>
       
       
