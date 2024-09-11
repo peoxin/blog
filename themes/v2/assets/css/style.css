@@ -50,6 +50,13 @@ pre {
   overflow-x: auto;
 }
 code { background: #f9f9f9; }
+/* Fixes iOS font sizing anomaly */
+code {
+    text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
 @media (prefers-color-scheme: dark) {
     pre { border-color: #3a3e41; }
     code { background: #1b1e1f; }
