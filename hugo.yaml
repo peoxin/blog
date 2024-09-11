@@ -38,6 +38,5 @@ frontmatter:
 
 markup:
   highlight:
-    style: catppuccin-latte
+    noClasses: false
     guessSyntax: true
-    noClasses: true

@@ -199,8 +199,10 @@ pacman -S iwd
 > 如果进入新系统后，发现忘记安装网络工具，解决方法如下：
 >
 > 重启并再次从 U 盘启动，进入安装环境。执行：
-`> mount /dev/<root_partition> /mnt`
-`> arch-chroot /mnt`
+>
+> `mount /dev/<root_partition> /mnt`
+>
+> `arch-chroot /mnt`
 >
 > 然后安装网络工具，继续进行以下**重启**步骤，进入新系统。
 

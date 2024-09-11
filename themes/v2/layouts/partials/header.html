@@ -8,9 +8,9 @@
     {{ else }}
       <title>{{ .Title }} | {{ .Site.Title }}</title>
     {{ end }}
-    {{- with resources.Match "css/*.css" | resources.Concat "style.css" | minify | fingerprint }}
+    {{ with resources.Match "css/*.css" | resources.Concat "style.css" | minify | fingerprint }}
       <link rel="stylesheet" type="text/css" href="{{ .RelPermalink }}">
-    {{- end }}
+    {{ end }}
     <link rel="shortcut icon" href="favicon.ico" />
   </head>
 
