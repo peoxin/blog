@@ -1,4 +1,4 @@
-baseURL: https://peoxin.github.io/blog
+baseURL: https://peoxin.github.io/blog/
 title: "Peoxin's Blog"
 copyright: "{Year} · peoxin"
 params:
