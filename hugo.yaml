@@ -34,8 +34,9 @@ frontmatter:
     - modified
     - :git
     - :fileModTime
-# markup:
-#   highlight:
-#     style: catppuccin-latte
-#     guessSyntax: true
-#     noClasses: true
+
+markup:
+  highlight:
+    style: catppuccin-latte
+    guessSyntax: true
+    noClasses: true
