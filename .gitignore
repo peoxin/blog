@@ -1,6 +1,7 @@
 # Hugo
 /public
 /resources
+*.lock
 
 # Misc
 .DS_Store
