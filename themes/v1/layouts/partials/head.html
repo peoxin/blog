@@ -1,0 +1,14 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+
+{{ if .IsHome }}
+  <title>{{ site.Title }}</title>
+{{ else }}
+  <title>{{ .Title }} | {{ site.Title }}</title>
+{{ end }}
+
+{{- with resources.Match "css/*.css" | resources.Concat "style.css" | minify | fingerprint }}
+  <link rel="stylesheet" type="text/css" href="{{ .RelPermalink }}" media="all">
+{{- end }}
+
+{{ partial "math.html" . }}

@@ -1,0 +1,174 @@
+:root {
+  --site-title: #5b6078;
+  --background: #ffffff;
+  --text: #303446;
+  --text-dim: #414559;
+  --link: #3366cc;
+  --link-visited: #795cb2;
+  --code: #4c4f69;
+  --code-background: #eff1f5;
+  --table-border: #a6adc8;
+  --table-th: #e1e5ea;
+  --table-tr: #edeff2;
+  --quote-border: #9ca0b0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #d8d8d8;
+    --code: #cbcbcb;
+    --text-dim: #a7a7a7;
+    --quote-border: #9ca0b0;
+    --link: #88a9e9;
+    --link-visited: #a390ca;
+    --code-background: #f3f5f7;
+    --code-hl: #9a9999;
+    --table-border: #495057;
+    --table-th: #414141;
+    --table-tr: #343434;
+  }
+}
+
+html {
+  height: 100%;
+  color: var(--text);
+  background-color: var(--background);
+  scroll-behavior: smooth;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: auto;
+  line-height: 1.54;
+  text-align: justify;
+  font-family:
+    "Inter",
+    -apple-system,
+    BlinkMacSystemFont,
+    "Roboto",
+    Helvetica,
+    sans-serif;
+}
+
+@media screen and (min-width: 760px) {
+  body {
+    margin: auto;
+    max-width: 68vw;
+  }
+}
+
+@media screen and (min-width: 1150px) {
+  body {
+    margin: auto;
+    max-width: 60vw;
+  }
+}
+
+main {
+  flex: 1;
+}
+
+.page-content {
+  margin-top: 2.4em;
+}
+
+p {
+  margin: 1em 0;
+}
+
+h1 {
+  font-size: 2.2em;
+  font-weight: normal;
+  margin-top: 1.2em;
+  margin-bottom: 0em;
+}
+
+h2 {
+  font-size: 1.65em;
+  font-weight: normal;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid;
+  border-color: var(--text-dim);
+}
+
+h3 {
+  font-size: 1.25em;
+  font-weight: 420;
+  margin-top: 1em;
+  margin-bottom: 0.7em;
+}
+
+h4 {
+  font-size: 1.1em;
+  font-weight: normal;
+  font-style: oblique;
+  margin-top: 1em;
+  margin-bottom: 0;
+}
+
+a {
+  text-decoration: none;
+  color: var(--link);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:visited {
+  color: var(--link-visited);
+}
+
+hr {
+  border-style: dashed;
+  color: var(--text-dim);
+}
+
+blockquote {
+  border-left: 0.3rem solid var(--quote-border);
+  font-style: oblique;
+  margin: 1.6rem 0;
+  padding: 0 1.4rem 0 1rem;
+  line-height: 1.6;
+}
+
+blockquote p {
+  margin: 0;
+}
+
+mark {
+  padding: 0 2px 0 2px;
+}
+
+ul {
+  padding-left: 2rem;
+}
+
+strong {
+  font-weight: 600;
+}
+
+th {
+  font-weight: 500;
+}
+
+.footnotes {
+  margin-top: 60px;
+}
+
+.page-time {
+  margin-right: 1em;
+}
+
+.tags {
+  margin-left: 0.2em;
+}
+
+.tags a,
+.tags a:visited {
+  color: var(--link);
+  filter: brightness(80%);
+}

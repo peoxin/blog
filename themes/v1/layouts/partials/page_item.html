@@ -1,0 +1,6 @@
+<li>
+  <div>
+  <span class="date">{{ .Date | time.Format ":date_medium" }}</span>
+  <a class="page-in-list" href="{{ .RelPermalink }}">{{ .Page.Title | markdownify }}</a>
+  </div>
+</li>

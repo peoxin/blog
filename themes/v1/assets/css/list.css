@@ -1,0 +1,19 @@
+.pages-list div {
+  display: grid;
+  grid-template-columns: 9em auto;
+}
+
+.pages-list a,
+.pages-list a:visited {
+  color: var(--link);
+}
+
+.taxonomy a,
+.taxonomy a:visited {
+  color: var(--link);
+}
+
+.terms a,
+.terms a:visited {
+  color: var(--link);
+}

@@ -1,0 +1,27 @@
+.header-nav {
+  display: flex;
+  margin-top: 8px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title h1 {
+  color: var(--site-title);
+  font-size: 1.6em;
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+
+.header-menu li {
+  display: inline-block;
+  margin-left: 1em;
+}
+
+.header-menu a, 
+.header-menu a:visited {
+  color: var(--link);
+}
+
+.header-menu a:hover {
+  text-decoration: underline;
+}

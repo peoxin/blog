@@ -1,0 +1,42 @@
+baseURL: https://peoxin.github.io/blog
+title: "Peoxin's Blog"
+copyright: "{Year} · peoxin"
+params:
+  subtitle: "A blog about programming, technology and life."
+  description: |
+    Contact me:
+      - email: peoxin@outlook.com
+      - github: [peoxin](https://github.com/peoxin)
+
+permalinks:
+  posts: posts/:year/:month/:title/
+
+theme: v2
+
+enableEmoji: true
+hasCJKLanguage: true
+
+menus:
+  main:
+    - name: Home
+      url: ""
+      weight: 10
+    - name: Categories
+      url: categories
+      weight: 20
+    - name: Tags
+      url: tags
+      weight: 30
+
+frontmatter:
+  lastmod:
+    - lastmod
+    - modified
+    - :git
+    - :fileModTime
+
+markup:
+  highlight:
+    style: catppuccin-latte
+    guessSyntax: true
+    noClasses: true

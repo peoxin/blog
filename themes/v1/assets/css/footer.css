@@ -1,0 +1,28 @@
+.footer {
+  font-size: 0.9em;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.footer a,
+.footer a:visited{
+  color: var(--link);
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.top-link {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 24px;
+  height: 24px;
+  transition: visibility 0.3s, opacity 0.6s linear;
+}
+
+.top-link svg {
+  opacity: 0.8;
+  fill: var(--text-dim);
+}

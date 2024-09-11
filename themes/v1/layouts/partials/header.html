@@ -1,0 +1,10 @@
+<nav class="header-nav">
+  <a class="header-title" href="{{ "" | absLangURL }}">
+    <h1>{{ site.Title }}</h1>
+  </a>
+  <ul class="header-menu">
+    {{- range site.Menus.main }}
+      <li><a href="{{ .URL | relURL }}">{{ safeHTML .Name }}</a></li>
+    {{- end }}
+  </ul>
+</nav>

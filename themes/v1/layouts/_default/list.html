@@ -1,0 +1,13 @@
+{{- define "main" }}
+  {{ .Content }}
+
+  {{- range .Sections }}
+    <h2 class="section-title">{{ .CurrentSection.Title }}</h2>
+    {{ .CurrentSection.Content }}
+    <ul class="pages-list">
+      {{- range .CurrentSection.RegularPages }}
+      {{ partial "page_item.html" . }}
+      {{- end }}
+    </ul>
+  {{- end }}
+{{- end }}

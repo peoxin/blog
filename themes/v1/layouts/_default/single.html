@@ -1,0 +1,15 @@
+{{- define "main" }}
+  <h1 class="page-title">{{ .Title }}</h1>
+
+  <span class="page-time">{{ .Date | time.Format ":date_long" }}</span>
+  <span class="page-time">Modified {{ .Lastmod | time.Format ":date_long" }}</span>
+  {{- partial "tags.html" . }}
+
+  <aside class="hidden lg:block toc" id="tableOfContentContainer">
+    {{ .TableOfContents }}
+  </aside>
+
+  <div class="page-content">
+    {{ .Content }}
+  </div>
+{{- end }}
