@@ -1,6 +1,6 @@
 # Peoxin's Blog
 
-This is a blog website project for peoxin.
+This is a blog site project for peoxin.
 It is built with [Hugo](https://gohugo.io/), a static site generator written in Go.
 
 Theme v1 is based on [hugo-dead-simple](https://github.com/barklan/hugo-dead-simple).

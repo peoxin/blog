@@ -4,6 +4,7 @@ copyright: "{Year} · peoxin"
 params:
   subtitle: "A blog about programming, technology and life."
   description: |
+    The content of this site is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
     Contact me:
       - email: peoxin@outlook.com
       - github: [peoxin](https://github.com/peoxin)
