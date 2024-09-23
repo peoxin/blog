@@ -1,55 +1,78 @@
 /* Fonts */
 body {
-  font-family: Optima, Candara, Calibri, Arial, sans-serif;
+    font-family: "LXGW WenKai", Optima, Candara, Calibri, Arial, sans-serif;
 }
 code {
-  font-family: "Lucida Console", Monaco, monospace;
-  font-size: 85%;
+    font-family: Menlo, Monaco, monospace;
+    font-size: 85%;
 }
 
 /* Page */
 body {
-  max-width: 800px;
-  margin: auto;
-  padding: 1em;
-  line-height: 1.5;
+    max-width: 800px;
+    margin: auto;
+    padding: 1em;
+    line-height: 1.5;
 }
 @media (prefers-color-scheme: dark) {
-  body {
-    background: #181a1b;
-    color: #e8e6e3;
-  }
+    body {
+        background: #181a1b;
+        color: #e8e6e3;
+    }
 }
 
 /* Header and footer */
-.menu { padding: 0; }
-.menu li { display: inline-block; }
-.article-meta, .menu a {
-  text-decoration: none;
-  background: #eee;
-  padding: 5px;
-  border-radius: 5px;
+.menu {
+    padding: 0;
 }
-.menu, .article-meta, footer { text-align: center; }
-.title { font-size: 1.1em; }
-footer a { text-decoration: none; }
+.menu li {
+    display: inline-block;
+    margin: 0px 3px;
+}
+.article-meta,
+.menu a {
+    text-decoration: none;
+    background: #eee;
+    padding: 5px;
+    border-radius: 5px;
+}
+.menu,
+.article-meta,
+footer {
+    text-align: center;
+}
+.title {
+    font-size: 1.1em;
+}
+footer a {
+    text-decoration: none;
+}
 hr {
-  border-style: dashed;
-  color: #ddd;
+    border-style: dashed;
+    color: #ddd;
 }
 @media (prefers-color-scheme: dark) {
-  .article-meta, .menu a { background: #222426; }
-  a { color: #3391ff; }
-  hr { color: #e8e6e3; }
+    .article-meta,
+    .menu a {
+        background: #222426;
+    }
+    a {
+        color: #3391ff;
+    }
+    hr {
+        color: #e8e6e3;
+    }
 }
 
 /* Code */
 pre {
-  border: 1px solid #ddd;
-  padding: 1em;
-  overflow-x: auto;
+    border: 1px solid #ddd;
+    padding: 1em;
+    overflow-x: auto;
 }
-code { background: #f9f9f9; }
+code {
+    background: #f9f9f9;
+}
 /* Fixes iOS font sizing anomaly */
 code {
     text-size-adjust: 100%;
@@ -58,42 +81,67 @@ code {
     -webkit-text-size-adjust: 100%;
 }
 @media (prefers-color-scheme: dark) {
-    pre { border-color: #3a3e41; }
-    code { background: #1b1e1f; }
+    pre {
+        border-color: #3a3e41;
+    }
+    code {
+        background: #1b1e1f;
+    }
 }
-  
+
 /* Blcokquote */
 blockquote {
-  background: #f9f9f9;
-  border-left: 5px solid #ccc;
-  padding: 3px 1em 3px;
-  margin: 1em; 
+    background: #f9f9f9;
+    border-left: 5px solid #ccc;
+    padding: 3px 1em 3px;
+    margin: 1em;
 }
 @media (prefers-color-scheme: dark) {
     blockquote {
-      background: #1b1e1f;
-      border-left-color: #3e4446;
+        background: #1b1e1f;
+        border-left-color: #3e4446;
     }
 }
 
 /* Table */
 table {
-  margin: auto;
-  border-top: 1px solid #666;
-  border-bottom: 1px solid #666;
+    margin: auto;
+    border-top: 1px solid #666;
+    border-bottom: 1px solid #666;
 }
-table thead th { border-bottom: 1px solid #ddd; }
-th, td { padding: 5px; }
-thead, tfoot, tr:nth-child(even) { background: #eee; }
+table thead th {
+    border-bottom: 1px solid #ddd;
+}
+th,
+td {
+    padding: 5px;
+}
+thead,
+tfoot,
+tr:nth-child(even) {
+    background: #eee;
+}
 @media (prefers-color-scheme: dark) {
     table {
-      border-top-color: #6a6357;
-      border-bottom-color: #6a6357;
+        border-top-color: #6a6357;
+        border-bottom-color: #6a6357;
     }
-    table thead th { border-bottom-color: #3a3e41; }
-    thead, tfoot, tr:nth-child(even) { background: #222426; }
+    table thead th {
+        border-bottom-color: #3a3e41;
+    }
+    thead,
+    tfoot,
+    tr:nth-child(even) {
+        background: #222426;
+    }
 }
 
 /* misc elements */
-img, iframe, video { max-width: 100%; }
-main { hyphens: auto; }
+img,
+iframe,
+video {
+    max-width: 100%;
+}
+main {
+    hyphens: auto;
+}
