@@ -1,8 +1,8 @@
-+++
-title = 'KDE Plasma 偏好设置'
-date = 2022-09-03T22:54:40+08:00
-draft = true
-+++
+---
+title: KDE Plasma 偏好设置
+date: 2022-09-03T22:54:40+08:00
+draft: true
+---
 
 ## 1 桌面布局
 

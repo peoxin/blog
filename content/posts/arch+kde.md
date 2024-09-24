@@ -1,8 +1,8 @@
-+++
-title = "Arch Linux + KDE 的安装和配置"
-date = 2022-05-02T02:07:54+08:00
-draft = true
-+++
+---
+title: Arch Linux + KDE 的安装和配置
+date: 2022-05-02T02:07:54+08:00
+draft: true
+---
 
 {% note warning %}
 此教程版本较旧，尚未更新。建议对照 Arch Linux 官方文档进行阅读！
@@ -79,12 +79,12 @@ timedatectl set-ntp true
 
 推荐使用`cfdisk`进行硬盘分区。执行`cfdisk /dev/<disk-name>`进入硬盘分区界面。参考分区表如下：
 
-| 分区 Partition | 文件系统 File System     | 大小 Size | 挂载点 Mount Point |
-| ------------ | -------------------- | ------- | --------------- |
-| /dev/sda1    | EFI System Partition | 300 MB  | /mnt/boot       |
-| /dev/sda2    | ext4                 | 20 GB   | /mnt            |
-| /dev/sda3    | Linux Swap           | 8 GB    | [SWAP]          |
-| /dev/sda4    | ext4                 | 剩余空间    | /mnt/home       |
+| 分区 Partition | 文件系统 File System | 大小 Size | 挂载点 Mount Point |
+| -------------- | -------------------- | --------- | ------------------ |
+| /dev/sda1      | EFI System Partition | 300 MB    | /mnt/boot          |
+| /dev/sda2      | ext4                 | 20 GB     | /mnt               |
+| /dev/sda3      | Linux Swap           | 8 GB      | [SWAP]             |
+| /dev/sda4      | ext4                 | 剩余空间  | /mnt/home          |
 
 分区完成后，可以执行`cfdisk`，`fdisk -l`，`lsblk -f`等命令检查分区情况。
 
@@ -208,11 +208,9 @@ grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
 > 注意检查`grub-mkconfig -o /boot/grub/grub.cfg`命令的输出，应该包含以下信息：
-> 
-> `Found linux image: /boot/vmlinuz-linux`
-> `Found initrd image: /boot/initramfs-linux.img`
-> `Found fallback initrd image(s) in /boot: initramfs-linux-fallback.img`
-> 
+>
+> `Found linux image: /boot/vmlinuz-linux` > `Found initrd image: /boot/initramfs-linux.img` > `Found fallback initrd image(s) in /boot: initramfs-linux-fallback.img`
+>
 > 如果无上述信息，说明安装出错。可以检查`Fstab`文件和挂载硬盘分区的顺序。
 
 #### 安装网络工具和文本编辑器
@@ -224,13 +222,11 @@ pacman -S vim # 文本编辑器
 ```
 
 > 如果不安装网络工具，新系统将无法联网。如果进入新系统后，发现忘记安装网络工具，解决方法如下：
-> 
+>
 > 重启并再次从U盘启动，进入安装环境。执行：
-> 
-> `mount /dev/<root_partition> /mnt # 参考分区下<root_partition>为sda2`
-> `arch-chroot /mnt`
-> `pacman -S iwd dhcpcd`
-> 
+>
+> `mount /dev/<root_partition> /mnt # 参考分区下<root_partition>为sda2` > `arch-chroot /mnt` > `pacman -S iwd dhcpcd`
+>
 > 继续进行以下**重启**步骤，进入新系统。
 
 #### 重启
@@ -346,11 +342,11 @@ fi
 ```
 
 > 执行`echo $SHELL`可以查看当前使用的Shell
-> 
+>
 > 执行`chsh -l`可以列出可用的Shell
-> 
+>
 > 执行`chsh -s <full_path_to_shell>`可以改变使用的Shell
-> 
+>
 > 查阅[Bash - ArchWiki](https://wiki.archlinux.org/title/Bash)、[Zsh - ArchWiki](https://wiki.archlinux.org/title/Zsh)和[Command-line shell - ArchWiki](https://wiki.archlinux.org/title/Command-line_shell)了解更多内容
 
 ### 进入桌面环境
@@ -455,7 +451,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ```
 
 > `Oh My Zsh`的配置，参考[ohmyzsh/ohmyzsh Wiki](https://github.com/ohmyzsh/ohmyzsh/wiki)
-> 
+>
 > 推荐主题：`robbyrussell`、`agnoster`
 
 ### 配置Vim
@@ -472,17 +468,17 @@ sudo pacman -S neovim
 
 ### 安装其他软件包
 
-| 软件         | AUR软件包                                                 |
-| ---------- | ------------------------------------------------------ |
-| Clash      | `clash-for-windows-bin`                                |
-| Edge       | `microsoft-edge-stable-bin`                            |
-| 网易云音乐      | `netease-cloud-music`                                  |
-| 微信         | `deepin-wine-wechat`                                   |
-| QQ         | `deepin-wine-qq`                                       |
+| 软件       | AUR软件包                                                |
+| ---------- | -------------------------------------------------------- |
+| Clash      | `clash-for-windows-bin`                                  |
+| Edge       | `microsoft-edge-stable-bin`                              |
+| 网易云音乐 | `netease-cloud-music`                                    |
+| 微信       | `deepin-wine-wechat`                                     |
+| QQ         | `deepin-wine-qq`                                         |
 | WPS        | `wps-office-cn`、`wps-office-mui-zh-cn`、`ttf-wps-fonts` |
-| Typora     | `typora`或`typora-free`                                 |
-| Latte Dock | `latte-dock`                                           |
-| MarkText   | `marktext-bin`                                         |
+| Typora     | `typora`或`typora-free`                                  |
+| Latte Dock | `latte-dock`                                             |
+| MarkText   | `marktext-bin`                                           |
 
 #### 安装Clash的注意事项
 

@@ -1,5 +1,5 @@
 ---
-title: "KMP 算法"
+title: KMP 算法
 date: 2023-03-08T17:52:36+08:00
 draft: true
 ---
