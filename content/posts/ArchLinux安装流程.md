@@ -186,25 +186,21 @@ grub-install --target=x86_64-efi --efi-directory=<esp_mount_point> --bootloader-
 grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-### 3.8 安装网络工具和文本编辑器
+### 3.8 安装文本编辑器和网络服务
 
 ```shell
-pacman -S vim dhcpcd
-# 以下网络工具选择其一即可
-pacman -S networkmanager
-pacman -S iwd
+pacman -S vim dhcpcd networkmanager
 ```
 
-> 如果不安装网络工具，新系统将无法联网。
-> 如果进入新系统后，发现忘记安装网络工具，解决方法如下：
+> 如果不安装网络服务，新系统将无法联网。
+> 如果进入新系统后，发现忘记安装网络服务，可以再次从 U 盘启动，进入安装环境。运行命令：
 >
-> 重启并再次从 U 盘启动，进入安装环境。执行：
+> ```
+> mount /dev/<root_partition> /mnt
+> arch-chroot /mnt
+> ```
 >
-> `mount /dev/<root_partition> /mnt`
->
-> `arch-chroot /mnt`
->
-> 然后安装网络工具，继续进行以下**重启**步骤，进入新系统。
+> 然后安装网络服务，并继续进行以下**重启**步骤，进入新系统。
 
 ### 3.9 重启
 
@@ -220,6 +216,8 @@ reboot
 
 #### 4.1.1 有线网络
 
+运行以下命令即可，无需额外操作：
+
 ```shell
 systemctl start dhcpcd.service
 systemctl enable dhcpcd.service
@@ -227,17 +225,16 @@ systemctl enable dhcpcd.service
 
 #### 4.1.2 无线网络
 
+首先，启动网络服务：
+
 ```shell
 systemctl start dhcpcd.service
 systemctl enable dhcpcd.service
 systemctl start NetworkManager.service
 systemctl enable NetworkManager.service
-# 或者使用 iwd
-# systemctl start iwd.service
-# systemctl enable iwd.service
 ```
 
-执行 `nmtui`，连接无线网络。
+然后，执行 `nmtui`，连接无线网络。
 
 ### 4.2 添加普通用户
 
