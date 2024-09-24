@@ -18,7 +18,7 @@ Arch Linux 的安装流程，主要参考 Arch Linux 官方文档 [Installation 
 
 在下载安装镜像的相同网址，下载 PGP 签名文件 `archlinux-version-x86_64.iso.sig`，并复制到 ISO 镜像所在的路径下。使用 `GnuPG` 工具，验证安装镜像的完整性：
 
-```
+```shell
 gpg --keyserver-options auto-key-retrieve --verify archlinux-version-x86_64.iso.sig
 ```
 
@@ -30,7 +30,7 @@ Linux 系统下使用 `dd` 命令，刻录镜像。
 
 ## 2 正式安装
 
-重启电脑，进入 BIOS 界面设置首选启动项为 U 盘。从 U 盘启动，进入安装环境。
+重启电脑，进入 BIOS 界面，设置首选启动项为 U 盘。从 U 盘启动，进入安装环境。
 
 ### 2.1 验证启动模式
 
@@ -53,11 +53,11 @@ ping baidu.com
 如果是无线网络，执行 `iwctl` 进入 `iwd` 提示符（执行 `exit` 退出提示符），连接网络：
 
 ```
-# 将下列命令中的 <device> 更换为你的网卡设备
-# 将下列命令中的 <SSID> 更换为无线网络的 SSID
-device list # 列出网卡设备
-station <device> scan # 扫描无线网络（该命令无输出）
-station <device> get-networks # 显示扫描结果
+# 将下列命令中的 <device> 替换为你的网卡设备
+# 将下列命令中的 <SSID> 替换为无线网络的 SSID
+device list                     # 列出网卡设备
+station <device> scan           # 扫描无线网络
+station <device> get-networks   # 显示扫描结果
 station <device> connect <SSID> # 连接无线网络
 ```
 
@@ -89,10 +89,6 @@ timedatectl set-ntp true
 ### 2.5 格式化硬盘分区
 
 ```shell
-# 参考分区下 <efi_system_partition> 为 sda1
-# 参考分区下 <root_partition> 为 sda2
-# 参考分区下 <swap_partition> 为 sda3
-# 参考分区下 <home_partition> 为 sda4
 mkfs.fat -F 32 /dev/<efi_system_partition>
 mkfs.ext4 /dev/<root_partition>
 mkswap /dev/<swap_partition>
@@ -108,11 +104,11 @@ swapon /dev/<swap_partition>
 mount --mkdir /dev/<home_partition> /mnt/home
 ```
 
-> 挂载硬盘分区时，必须首先挂载 `Root` 分区，然后才能挂载 `ESP` 分区。否则，`/mnt/boot` 会发生冲突，导致出错。
+> **注意**：挂载硬盘分区时，必须首先挂载 `Root` 分区，然后才能挂载 `ESP` 分区。否则，`/mnt/boot` 会发生冲突，导致出错。
 
 ### 2.7 更换镜像源
 
-在 `/etc/pacman.d/mirrorlist` 文件最顶端添加：
+在 `/etc/pacman.d/mirrorlist` 文件的最顶端添加：
 
 ```
 Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
@@ -150,18 +146,17 @@ hwclock --systohc
 
 首先安装 `vim`。
 
-在 `/etc/locale.gen` 文件中，将 `en_US.UTF-8 UTF-8` 和 `zh_CN.UTF-8 UTF-8` 取消注释。然后执行 `locale-gen` 命令。
+在 `/etc/locale.gen` 文件中，将 `en_US.UTF-8 UTF-8` 和 `zh_CN.UTF-8 UTF-8` 取消注释。然后，执行 `locale-gen` 命令。
 
-新建 `/etc/locale.conf` 文件，添加 `LANG=en_US.UTF-8`。
+新建 `/etc/locale.conf` 文件，并添加内容 `LANG=en_US.UTF-8`。
 
 ### 3.5 配置网络
 
 新建 `/etc/hostname` 文件，添加主机名，例如：`myhostname`。
 
-在 `/etc/hosts` 文件中，添加以下内容：
+在 `/etc/hosts` 文件中，添加以下内容（将 `myhostname` 替换为自己的主机名）：
 
 ```
-# 将 myhostname 替换为自己的主机名
 127.0.0.1 localhost
 ::1 localhost
 127.0.1.1 myhostname.localdomain myhostname
@@ -175,11 +170,10 @@ hwclock --systohc
 
 安装 `grub` 和 `efibootmgr`。
 
-> 执行 `lsblk`，检查 `EFI System Partition` 的挂载点，确保其已被成功挂载。如果没有成功挂载，请检查挂载硬盘分区的顺序。
+> **建议**：在进行后续步骤前，执行 `lsblk`，并检查 `EFI System Partition` 的挂载点，确保其已被成功挂载。如果没有成功挂载，请检查挂载硬盘分区的顺序。
 
-执行命令：
-
-> 在 Chroot 后，参考挂载点下 `<esp_mount_point>` 为 `/boot`，而不是 `/mnt/boot`。
+执行以下命令。
+需要注意的是，在 Chroot 后，参考挂载点下的 `<esp_mount_point>` 为 `/boot`，而不是 `/mnt/boot`。
 
 ```shell
 grub-install --target=x86_64-efi --efi-directory=<esp_mount_point> --bootloader-id=GRUB
