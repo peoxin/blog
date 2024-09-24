@@ -2,5 +2,10 @@
   <hr/>
   {{ replace .Site.Copyright "{Year}" now.Year | markdownify}}
   </footer>
+
+  {{ with resources.Match "js/*.js" | resources.Concat "script.js" | minify | fingerprint }}
+    <script src="{{ .RelPermalink }}"></script>
+  {{ end }}
+
   </body>
 </html>

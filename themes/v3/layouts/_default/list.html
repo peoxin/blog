@@ -1,0 +1,24 @@
+{{ partial "header.html" . }}
+
+{{ if .IsHome }}
+  <h1>{{ .Site.Title }}</h1>
+  <h2>{{ .Site.Params.subtitle }}</h2>
+  {{ .Site.Params.description | markdownify }}
+  {{ .Content }}
+  <hr>
+{{ else }}
+  <h1>{{ .Title }}</h1>
+{{ end }}
+
+<ul>
+  {{ $pages := .Pages }}
+  {{ if .IsHome }}{{ $pages = .Site.RegularPages }}{{ end }}
+  {{ range (where $pages "Section" "!=" "") }}
+  <li>
+    <span class="date">{{ .Date.Format "2006/01/02" }}</span>
+    <a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
+  </li>
+  {{ end }}
+</ul>
+
+{{ partial "footer.html" . }}

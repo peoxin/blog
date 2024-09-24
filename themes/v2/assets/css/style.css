@@ -1,147 +1,190 @@
 /* Fonts */
-body {
-    font-family: "LXGW WenKai", Optima, Candara, Calibri, Arial, sans-serif;
+body,
+.copy-code-button {
+  font-family: "LXGW WenKai", Optima, Candara, Calibri, Arial, sans-serif;
 }
 code {
-    font-family: Menlo, Monaco, monospace;
-    font-size: 85%;
+  font-family: Menlo, Monaco, monospace;
+  font-size: 85%;
 }
 
 /* Page */
 body {
-    max-width: 800px;
-    margin: auto;
-    padding: 1em;
-    line-height: 1.5;
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 1.5;
 }
 @media (prefers-color-scheme: dark) {
-    body {
-        background: #181a1b;
-        color: #e8e6e3;
-    }
+  body {
+    background: #181a1b;
+    color: #e8e6e3;
+  }
 }
 
 /* Header and footer */
 .menu {
-    padding: 0;
+  padding: 0;
 }
 .menu li {
-    display: inline-block;
-    margin: 0px 3px;
+  display: inline-block;
+  margin: 0px 3px;
 }
 .article-meta,
 .menu a {
-    text-decoration: none;
-    background: #eee;
-    padding: 5px;
-    border-radius: 5px;
+  text-decoration: none;
+  background: #eee;
+  padding: 5px;
+  border-radius: 5px;
 }
 .menu,
 .article-meta,
 footer {
-    text-align: center;
+  text-align: center;
 }
 .title {
-    font-size: 1.1em;
+  font-size: 1.1em;
 }
 footer a {
-    text-decoration: none;
+  text-decoration: none;
 }
 hr {
-    border-style: dashed;
-    color: #ddd;
+  border-style: dashed;
+  color: #ddd;
 }
 @media (prefers-color-scheme: dark) {
-    .article-meta,
-    .menu a {
-        background: #222426;
-    }
-    a {
-        color: #3391ff;
-    }
-    hr {
-        color: #e8e6e3;
-    }
+  .article-meta,
+  .menu a {
+    background: #222426;
+  }
+  a {
+    color: #3391ff;
+  }
+  hr {
+    color: #e8e6e3;
+  }
 }
 
 /* Code */
 pre {
-    border: 1px solid #ddd;
-    padding: 1em;
-    overflow-x: auto;
+  border: 1px solid #ddd;
+  padding: 1em;
+  overflow-x: auto;
 }
 code {
-    background: #f9f9f9;
+  background: #f9f9f9;
 }
-/* Fixes iOS font sizing anomaly */
+/* Fix iOS font sizing anomaly */
 code {
-    text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 @media (prefers-color-scheme: dark) {
-    pre {
-        border-color: #3a3e41;
-    }
-    code {
-        background: #1b1e1f;
-    }
+  pre {
+    border-color: #3a3e41;
+  }
+  code {
+    background: #1b1e1f;
+  }
 }
 
-/* Blcokquote */
+/* Blockquote */
 blockquote {
-    background: #f9f9f9;
-    border-left: 5px solid #ccc;
-    padding: 3px 1em 3px;
-    margin: 1em;
+  background: #f9f9f9;
+  border-left: 5px solid #ccc;
+  padding: 3px 1em 3px;
+  margin: 1em;
 }
 @media (prefers-color-scheme: dark) {
-    blockquote {
-        background: #1b1e1f;
-        border-left-color: #3e4446;
-    }
+  blockquote {
+    background: #1b1e1f;
+    border-left-color: #3e4446;
+  }
 }
 
 /* Table */
 table {
-    margin: auto;
-    border-top: 1px solid #666;
-    border-bottom: 1px solid #666;
+  margin: auto;
+  border-top: 1px solid #666;
+  border-bottom: 1px solid #666;
 }
 table thead th {
-    border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
 }
 th,
 td {
-    padding: 5px;
+  padding: 5px;
 }
 thead,
 tfoot,
 tr:nth-child(even) {
-    background: #eee;
+  background: #eee;
 }
 @media (prefers-color-scheme: dark) {
-    table {
-        border-top-color: #6a6357;
-        border-bottom-color: #6a6357;
-    }
-    table thead th {
-        border-bottom-color: #3a3e41;
-    }
-    thead,
-    tfoot,
-    tr:nth-child(even) {
-        background: #222426;
-    }
+  table {
+    border-top-color: #6a6357;
+    border-bottom-color: #6a6357;
+  }
+  table thead th {
+    border-bottom-color: #3a3e41;
+  }
+  thead,
+  tfoot,
+  tr:nth-child(even) {
+    background: #222426;
+  }
 }
 
-/* misc elements */
+/* Copy code button */
+@keyframes button-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes button-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+.copy-code-button {
+  margin-top: -22px;
+  float: right;
+  color: #4c4f69;
+  background-color: #eff1f5;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+.copy-code-button:hover,
+.copy-code-button:focus {
+  opacity: 1;
+  animation-name: code-fade-in;
+}
+.copy-code-button {
+  animation-name: code-fade-out;
+}
+@media (prefers-color-scheme: dark) {
+  .copy-code-button {
+    color: #ccd5f3;
+    background-color: #1e1e2e;
+  }
+}
+
+/* Misc elements */
 img,
 iframe,
 video {
-    max-width: 100%;
+  max-width: 100%;
 }
 main {
-    hyphens: auto;
+  hyphens: auto;
 }

@@ -2,12 +2,13 @@
 
 <div class="article-meta">
   <h1><span class="title">{{ .Title | markdownify }}</span></h1>
-  {{ with .Params.author }}<h2 class="author">{{ . }}</h2>{{ end }}
-  {{ if (gt .Params.date 0) }}<h2 class="date">{{ .Date.Format "2006/01/02" }}</h2>{{ end }}
+  {{ if (gt .Date 0) }}
+  <h2 class="date">{{ .Date.Format "2006/01/02" }}</h2>
+  {{ end }} {{ if and (gt .Lastmod 0) (gt .Lastmod .Date) }}
+  <h3 class="lastmod">Last updated on {{ .Lastmod.Format "2006/01/02" }}</h3>
+  {{ end }}
 </div>
 
-<main>
-  {{ .Content }}
-</main>
+<main>{{ .Content }}</main>
 
 {{ partial "footer.html" . }}

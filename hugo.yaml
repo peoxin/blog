@@ -17,6 +17,8 @@ theme: v2
 enableEmoji: true
 hasCJKLanguage: true
 
+enableGitInfo: true
+
 menus:
   main:
     - name: Home
@@ -28,13 +30,6 @@ menus:
     - name: Tags
       url: tags
       weight: 30
-
-frontmatter:
-  lastmod:
-    - lastmod
-    - modified
-    - :git
-    - :fileModTime
 
 markup:
   highlight:

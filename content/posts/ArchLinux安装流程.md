@@ -77,12 +77,12 @@ timedatectl set-ntp true
 
 参考分区表如下：
 
-| 分区 Partition | 文件系统 File System     | 大小 Size | 挂载点 Mount Point |
-| ------------ | -------------------- | ------- | --------------- |
-| /dev/sda1    | EFI System Partition | 300 MB  | /mnt/boot       |
-| /dev/sda2    | ext4                 | 20 GB   | /mnt            |
-| /dev/sda3    | Linux Swap           | 8 GB    | [SWAP]          |
-| /dev/sda4    | ext4                 | 剩余空间    | /mnt/home       |
+| 分区 Partition | 文件系统 File System | 大小 Size | 挂载点 Mount Point |
+| -------------- | -------------------- | --------- | ------------------ |
+| /dev/sda1      | EFI System Partition | 300 MB    | /mnt/boot          |
+| /dev/sda2      | ext4                 | 20 GB     | /mnt               |
+| /dev/sda3      | Linux Swap           | 8 GB      | [SWAP]             |
+| /dev/sda4      | ext4                 | 剩余空间  | /mnt/home          |
 
 完成分区后，可以执行 `lsblk` 命令检查分区情况。
 
@@ -241,19 +241,21 @@ systemctl enable NetworkManager.service
 
 ### 4.2 添加普通用户
 
+添加用户名为 `username` 的普通用户：
+
 ```shell
-# 将 username 替换为自己的用户名
 useradd -m username
 passwd username
 ```
 
-> 添加用户的更多选项：
-> `useradd -m -G additional_groups -s login_shell username`
+安装 `sudo`，并为新添加的用户设置 root 权限。
+在 `/etc/sudoers` 文件中的 `root ALL=(ALL:ALL) ALL` 一行下，添加 `%wheel ALL=(ALL:ALL) ALL`。
+然后，将用户添加到 `wheel` 用户组中：
 
-安装 `sudo`，为新添加的用户设置 root 权限：
+```
+usermod -aG wheel username
+```
 
-在 `/etc/sudoers` 文件中的 `root ALL=(ALL:ALL) ALL` 一行下，添加 `username ALL=(ALL:ALL) ALL`。
-
-执行 `exit` 退出 root 用户的登录，并登录到 username 用户。
+执行 `exit` 退出 root 用户的登录，并登录到 `username` 用户。
 
 至此，Arch Linux 已经完成安装。
