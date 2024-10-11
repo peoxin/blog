@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="shortcut icon" href="/favicon.ico" />
     <link href=" https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css " rel="stylesheet">
     {{ with resources.Match "css/*.css" | resources.Concat "style.css" | minify | fingerprint }}
         <link rel="stylesheet" type="text/css" href="{{ .RelPermalink }}">
