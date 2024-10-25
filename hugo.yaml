@@ -8,6 +8,7 @@ params:
     Contact me:
       - email: peoxin@outlook.com
       - github: [peoxin](https://github.com/peoxin)
+  math: true
 
 permalinks:
   posts: posts/:year/:month/:title/
@@ -35,3 +36,18 @@ markup:
   highlight:
     noClasses: false
     guessSyntax: true
+  goldmark:
+    extensions:
+      passthrough:
+        delimiters:
+          block:
+            - - \[
+              - \]
+            - - $$
+              - $$
+          inline:
+            - - \(
+              - \)
+            - - $
+              - $
+        enable: true

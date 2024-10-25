@@ -7,5 +7,17 @@
     <script src="{{ .RelPermalink }}"></script>
   {{ end }}
 
+  {{ if .Param "math" }}
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script>
+    MathJax = {
+      tex: {
+        displayMath: [['\\[', '\\]'], ['$$', '$$']],  // block
+        inlineMath: [['\\(', '\\)'], ['$', '$']]  // inline
+      }
+    };
+    </script>
+  {{ end }}
+
   </body>
 </html>

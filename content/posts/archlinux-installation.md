@@ -1,9 +1,9 @@
 ---
 title: Arch Linux 安装流程
 date: 2023-02-09T18:23:54+08:00
-draft: false
+categories: ["Linux"]
 tags: ["Arch Linux", "Linux"]
-categories: ["Linux", "Tech"]
+draft: false
 ---
 
 Arch Linux 的安装流程，主要参考 Arch Linux 官方文档 [Installation guide - ArchWiki](https://wiki.archlinux.org/title/Installation_guide)。

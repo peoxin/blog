@@ -1,8 +1,12 @@
 ---
 title: KDE Plasma 偏好设置
 date: 2022-09-03T22:54:40+08:00
-draft: true
+categories: ["Linux"]
+tags: ["KDE", "Linux"]
+draft: false
 ---
+
+> 本文中所进行的偏好设置，可能不适用于最新的 KDE Plasma 6。
 
 ## 1 桌面布局
 
