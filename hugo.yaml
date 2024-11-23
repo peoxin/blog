@@ -33,6 +33,10 @@ menus:
       weight: 30
 
 markup:
+  tableOfContents:
+    startLevel: 2
+    endLevel: 4
+    ordered: false
   highlight:
     noClasses: false
     guessSyntax: true

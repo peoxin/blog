@@ -1,8 +1,8 @@
 ---
 title: Arch Linux 安装流程
 date: 2023-02-09T18:23:54+08:00
-categories: ["Linux"]
-tags: ["Arch Linux", "Linux"]
+categories: ["linux"]
+tags: ["Arch Linux", "linux"]
 draft: false
 ---
 

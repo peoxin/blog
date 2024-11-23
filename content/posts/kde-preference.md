@@ -1,8 +1,8 @@
 ---
 title: KDE Plasma 偏好设置
 date: 2022-09-03T22:54:40+08:00
-categories: ["Linux"]
-tags: ["KDE", "Linux"]
+categories: ["linux"]
+tags: ["KDE", "linux"]
 draft: false
 ---
 

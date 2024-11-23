@@ -1,8 +1,8 @@
 ---
 title: KDE Plasma 5 安装流程
 date: 2022-05-02T02:07:54+08:00
-categories: ["Linux"]
-tags: ["KDE", "Linux"]
+categories: ["linux"]
+tags: ["KDE", "linux"]
 draft: false
 ---
 

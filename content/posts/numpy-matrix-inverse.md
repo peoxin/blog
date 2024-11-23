@@ -2,7 +2,7 @@
 title: Numpy 矩阵求逆
 date: 2023-03-07T01:03:38+08:00
 categories: []
-tags: ["Numpy"]
+tags: ["numpy"]
 draft: false
 ---
 
