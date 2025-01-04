@@ -14,141 +14,218 @@ Arch Linux 的安装流程，主要参考 Arch Linux 官方文档 [Installation 
 
 在 [Arch Linux 清华源](https://mirrors.tuna.tsinghua.edu.cn/archlinux/iso/)，下载安装镜像 `archlinux-version-x86_64.iso`。
 
-### 1.2 验证签名（可选）
+下载完成后，可以使用 `sha256sum` 检查镜像文件的完整性。
 
-在下载安装镜像的相同网址，下载 PGP 签名文件 `archlinux-version-x86_64.iso.sig`，并复制到 ISO 镜像所在的路径下。使用 `GnuPG` 工具，验证安装镜像的完整性：
+### 1.2 刻录镜像
 
-```shell
-gpg --keyserver-options auto-key-retrieve --verify archlinux-version-x86_64.iso.sig
+在 Windows 系统下，可以使用 Rufus、BalenaEtcher、Ventoy 等软件，将安装镜像刻录到 U 盘中。
+
+在 Linux 和 MacOS 系统下，可以使用 `dd` 命令刻录镜像：
+
+```sh
+sudo dd if=/path/to/file.iso of=/dev/sdX bs=4M oflag=sync status=progress
 ```
-
-### 1.3 刻录镜像
-
-Windows 系统下使用 `rufus` 软件，将安装镜像刻录到 U 盘中。
-
-Linux 系统下使用 `dd` 命令，刻录镜像。
 
 ## 2 正式安装
 
 重启电脑，进入 BIOS 界面，设置首选启动项为 U 盘。从 U 盘启动，进入安装环境。
 
+> **提示**：在连接网络并更新系统时钟后，后续的安装步骤也可以使用自动化安装脚本 `archinstall` 来完成，对照手动安装的步骤进行配置。
+
 ### 2.1 验证启动模式
 
-```shell
-ls /sys/firmware/efi/efivars
+```sh
+cat /sys/firmware/efi/fw_platform_size
 ```
 
-如果能够正确显示路径信息，无错误提示，说明启动模式为 UEFI。
+如果该命令返回 `64`，则系统以 UEFI 模式启动，可以继续进行以下步骤。
 
 ### 2.2 连接网络
 
 验证网络连接：
 
-```shell
-ping baidu.com
+```sh
+ping archlinux.org
 ```
 
 如果是有线网络，应该会自动连接。
 
-如果是无线网络，执行 `iwctl` 进入 `iwd` 提示符（执行 `exit` 退出提示符），连接网络：
+如果是无线网络，执行 `iwctl` 进入 `iwd` 提示符（执行 `exit` 退出），连接网络：
 
 ```
-# 将下列命令中的 <device> 替换为你的网卡设备
-# 将下列命令中的 <SSID> 替换为无线网络的 SSID
+# 将以下命令中的 <device> 替换为你的网卡设备
+# 将以下命令中的 <SSID> 替换为无线网络的 SSID
 device list                     # 列出网卡设备
-station <device> scan           # 扫描无线网络
+station <device> scan           # 扫描无线网络（无输出）
 station <device> get-networks   # 显示扫描结果
 station <device> connect <SSID> # 连接无线网络
 ```
 
 ### 2.3 更新系统时钟
 
-```shell
+在安装环境中，建立网络连接后，系统时间将自动同步。
+执行以下命令，检查系统时间是否已经同步：
+
+```sh
+timedatectl
+```
+
+如果系统时间未同步，可以执行以下命令，设置自动同步：
+
+```sh
 timedatectl set-ntp true
 ```
 
-更新系统时钟后，可以执行 `timedatectl status` 检查。
-
 ### 2.4 硬盘分区
 
-执行 `fdisk -l` 列出硬盘设备。
+以下分别介绍 Ext4 和 Btrfs 两种文件系统的推荐分区方案，选择其一即可。
 
-推荐使用 `cfdisk` 进行硬盘分区。执行 `cfdisk /dev/<disk-name>` 进入硬盘分区界面。
+执行 `lsblk` 列出所有的硬盘设备。
+
+使用 `fdisk` 或 `cfdisk` 进行硬盘分区。
+执行 `fdisk /dev/<disk>` 或 `cfdisk /dev/<disk>` 进入硬盘分区界面。
+
+#### 2.4.1 Ext4 文件系统
 
 参考分区表如下：
 
 | 分区 Partition | 文件系统 File System | 大小 Size | 挂载点 Mount Point |
 | -------------- | -------------------- | --------- | ------------------ |
-| /dev/sda1      | EFI System Partition | 300 MB    | /mnt/boot          |
-| /dev/sda2      | ext4                 | 20 GB     | /mnt               |
-| /dev/sda3      | Linux Swap           | 8 GB      | [SWAP]             |
-| /dev/sda4      | ext4                 | 剩余空间  | /mnt/home          |
+| `/dev/sda1`    | EFI System Partition | 512 MB    | `/mnt/boot`        |
+| `/dev/sda2`    | Ext4                 | 80 GB     | `/mnt`             |
+| `/dev/sda3`    | Linux Swap           | 16 GB     | [SWAP]             |
+| `/dev/sda4`    | Ext4                 | 剩余空间  | `/mnt/home`        |
 
-完成分区后，可以执行 `lsblk` 命令检查分区情况。
+格式化硬盘分区：
 
-### 2.5 格式化硬盘分区
-
-```shell
+```sh
 mkfs.fat -F 32 /dev/<efi_system_partition>
 mkfs.ext4 /dev/<root_partition>
 mkswap /dev/<swap_partition>
 mkfs.ext4 /dev/<home_partition>
 ```
 
-### 2.6 挂载硬盘分区
+挂载硬盘分区：
 
-```shell
+```sh
 mount /dev/<root_partition> /mnt
 mount --mkdir /dev/<efi_system_partition> /mnt/boot
 swapon /dev/<swap_partition>
 mount --mkdir /dev/<home_partition> /mnt/home
 ```
 
-> **注意**：挂载硬盘分区时，必须首先挂载 `Root` 分区，然后才能挂载 `ESP` 分区。否则，`/mnt/boot` 会发生冲突，导致出错。
+> **注意**：挂载硬盘分区时，必须依照挂载点的层次关系，按顺序挂载。
+> 即首先挂载 Root 分区，然后才能挂载 EFI 和 Home 分区。
 
-### 2.7 更换镜像源
+#### 2.4.2 Btrfs 文件系统
 
-在 `/etc/pacman.d/mirrorlist` 文件的最顶端添加：
+对于 Btrfs 文件系统，可以采用扁平化布局，即除了 EFI 分区和交换分区外，其他分区都可以变成同一个分区下的子卷。
+
+参考分区表如下：
+
+| 分区 Partition | 文件系统 File System | 大小 Size | 挂载点 Mount Point |
+| -------------- | -------------------- | --------- | ------------------ |
+| `/dev/sda1`    | EFI System Partition | 512 MB    | `/mnt/boot`        |
+| `/dev/sda2`    | Linux Swap           | 16 GB     | [SWAP]             |
+| `/dev/sda3`    | Btrfs                | 剩余空间  |                    |
+
+对于 `/dev/sda3` 分区，其子卷的布局如下：
+
+| 子卷 Subvolume | 挂载点 Mount Point | 挂载选项 Mount Options           |
+| -------------- | ------------------ | -------------------------------- |
+| @              | `/mnt`             | `noatime, compress=zstd`         |
+| @home          | `/mnt/home`        | `noatime, compress=zstd`         |
+| @var-log       | `/mnt/var/log`     | `noatime, compress=zstd`, no CoW |
+| @var-cache     | `/mnt/var/cache`   | `noatime, compress=zstd`, no CoW |
+| @var-tmp       | `/mnt/var/tmp`     | `noatime, compress=zstd`, no CoW |
+
+在完成硬盘分区后，格式化硬盘分区：
+
+```sh
+mkfs.fat -F 32 /dev/<efi_system_partition>
+mkswap /dev/<swap_partition>
+mkfs.btrfs /dev/<btrfs_partition>
+```
+
+然后，挂载硬盘分区。首先，挂载 Btrfs 分区：
+
+```sh
+# 创建子卷
+mount /dev/<btrfs_partition> /mnt
+btrfs subvolume create /mnt/@{,home,var-log,var-cache,var-tmp}
+umount /mnt
+
+# 挂载子卷
+mount /dev/<btrfs_partition> /mnt -o subvol=@,noatime,compress=zstd
+mount --mkdir /dev/<btrfs_partition> /mnt/home -o subvol=@home,noatime,compress=zstd
+mount --mkdir /dev/<btrfs_partition> /mnt/var/log -o subvol=@var-log,noatime,compress=zstd
+mount --mkdir /dev/<btrfs_partition> /mnt/var/cache -o subvol=@var-cache,noatime,compress=zstd
+mount --mkdir /dev/<btrfs_partition> /mnt/var/tmp -o subvol=@var-tmp,noatime,compress=zstd
+
+# 禁用部分子卷的 CoW 特性
+chattr +C /mnt/var/{log,cache,tmp}
+```
+
+然后，挂载 EFI 和交换分区：
+
+```sh
+mount --mkdir /dev/<efi_system_partition> /mnt/boot
+swapon /dev/<swap_partition>
+```
+
+### 2.5 安装系统基本软件包
+
+首先，更换 pacman 的镜像源。在 `/etc/pacman.d/mirrorlist` 文件的开头添加：
 
 ```
 Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
 ```
 
-### 2.8 安装系统必需软件包
+然后，执行以下命令：
 
-```shell
-pacstrap /mnt base linux linux-firmware
+```sh
+# 如果使用 AMD 处理器，将 intel-ucode 替换为 amd-ucode
+# 可以将 neovim 替换为其他文本编辑器
+# 如果不使用 Btrfs 文件系统，则删除 btrfs-progs
+pacstrap -K /mnt base linux linux-firmware intel-ucode networkmanager neovim btrfs-progs
 ```
 
 ## 3 系统初步配置
 
 ### 3.1 生成 Fstab 文件
 
-```shell
+```sh
 genfstab -U /mnt >> /mnt/etc/fstab
 ```
 
 ### 3.2 Chroot
 
-```shell
+```sh
 arch-chroot /mnt
 ```
 
 ### 3.3 设置时区
 
-```shell
+```sh
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-timedatectl set-ntp true
 hwclock --systohc
 ```
 
 ### 3.4 本地化设置
 
-首先安装 `vim`。
+在 `/etc/locale.gen` 文件中，将 `en_US.UTF-8 UTF-8` 和 `zh_CN.UTF-8 UTF-8` 取消注释。
 
-在 `/etc/locale.gen` 文件中，将 `en_US.UTF-8 UTF-8` 和 `zh_CN.UTF-8 UTF-8` 取消注释。然后，执行 `locale-gen` 命令。
+然后，执行以下命令：
 
-新建 `/etc/locale.conf` 文件，并添加内容 `LANG=en_US.UTF-8`。
+```
+locale-gen
+```
+
+新建 `/etc/locale.conf` 文件，并添加内容：
+
+```
+LANG=en_US.UTF-8
+```
 
 ### 3.5 配置网络
 
@@ -162,9 +239,15 @@ hwclock --systohc
 127.0.1.1 myhostname.localdomain myhostname
 ```
 
-### 3.6 设置 root 用户的密码
+### 3.6 修改 mkinitcpio 配置
 
-执行 `passwd`，并输入要为 root 用户设置的密码。
+如果使用 Btrfs 文件系统，需要修改 `/etc/mkinitcpio.conf` 文件，在 `MODULES=()` 中添加 `btrfs`。
+
+然后，执行命令：
+
+```sh
+mkinitcpio -P
+```
 
 ### 3.7 安装 GRUB
 
@@ -172,33 +255,21 @@ hwclock --systohc
 
 > **建议**：在进行后续步骤前，执行 `lsblk`，并检查 `EFI System Partition` 的挂载点，确保其已被成功挂载。如果没有成功挂载，请检查挂载硬盘分区的顺序。
 
-执行以下命令。
-需要注意的是，在 Chroot 后，参考挂载点下的 `<esp_mount_point>` 为 `/boot`，而不是 `/mnt/boot`。
+执行以下命令：
 
-```shell
+```sh
+# 注意：在 Chroot 后，参考挂载点下的 <esp_mount_point> 为 /boot，而不是 /mnt/boot
 grub-install --target=x86_64-efi --efi-directory=<esp_mount_point> --bootloader-id=GRUB
-grub-mkconfig -o /boot/grub/grub.cfg
+grub-mkconfig -o <esp_mount_point>/grub/grub.cfg
 ```
 
-### 3.8 安装文本编辑器和网络服务
+### 3.8 设置 root 用户的密码
 
-```shell
-pacman -S vim dhcpcd networkmanager
-```
-
-> 如果不安装网络服务，新系统将无法联网。
-> 如果进入新系统后，发现忘记安装网络服务，可以再次从 U 盘启动，进入安装环境。运行命令：
->
-> ```
-> mount /dev/<root_partition> /mnt
-> arch-chroot /mnt
-> ```
->
-> 然后安装网络服务，并继续进行以下**重启**步骤，进入新系统。
+执行 `passwd`，并输入要为 root 用户设置的密码。
 
 ### 3.9 重启
 
-```shell
+```sh
 exit
 umount -R /mnt
 reboot
@@ -208,43 +279,28 @@ reboot
 
 ### 4.1 连接网络
 
-#### 4.1.1 有线网络
+启动网络服务：
 
-运行以下命令即可，无需额外操作：
-
-```shell
-systemctl start dhcpcd.service
-systemctl enable dhcpcd.service
+```sh
+systemctl enable --now NetworkManager.service
 ```
 
-#### 4.1.2 无线网络
-
-首先，启动网络服务：
-
-```shell
-systemctl start dhcpcd.service
-systemctl enable dhcpcd.service
-systemctl start NetworkManager.service
-systemctl enable NetworkManager.service
-```
-
-然后，执行 `nmtui`，连接无线网络。
+如果是无线网络，可以执行 `nmcli` 或 `nmtui`，进行连接。
 
 ### 4.2 添加普通用户
 
 添加用户名为 `username` 的普通用户：
 
-```shell
-useradd -m username
+```sh
+useradd -G wheel -m username
 passwd username
 ```
 
 安装 `sudo`，并为新添加的用户设置 root 权限。
-在 `/etc/sudoers` 文件中的 `root ALL=(ALL:ALL) ALL` 一行下，添加 `%wheel ALL=(ALL:ALL) ALL`。
-然后，将用户添加到 `wheel` 用户组中：
+执行 `visudo` 命令来编辑 `/etc/sudoers` 文件，解除以下一行的注释：
 
 ```
-usermod -aG wheel username
+%wheel ALL=(ALL:ALL) ALL
 ```
 
 执行 `exit` 退出 root 用户的登录，并登录到 `username` 用户。
