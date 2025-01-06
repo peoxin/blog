@@ -187,7 +187,7 @@ Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
 # 如果使用 AMD 处理器，将 intel-ucode 替换为 amd-ucode
 # 可以将 neovim 替换为其他文本编辑器
 # 如果不使用 Btrfs 文件系统，则删除 btrfs-progs
-pacstrap -K /mnt base linux linux-firmware intel-ucode networkmanager neovim btrfs-progs
+pacstrap -K /mnt base base-devel linux linux-firmware intel-ucode networkmanager neovim btrfs-progs
 ```
 
 ## 3 系统初步配置

@@ -8,9 +8,33 @@ draft: false
 
 在 Arch Linux 安装完成后，可以根据需要进行以下配置。
 
-## 1 解决网络访问问题
+## 1 安装字体
 
-### 1.1 更换官方软件仓库的镜像源
+以下是一些推荐的字体，以及其对应的软件包。
+
+中文字体：
+
+- 思源字体：`noto-fonts-cjk`
+
+外文字体：
+
+- Noto：`noto-fonts`
+
+符号字体：
+
+- Nerd：`ttf-nerd-fonts-symbols`
+
+编程字体：
+
+- JetBrains Mono：`ttf-jetbrains-mono`
+- Source Code Pro：`adobe-source-code-pro-fonts`
+- Hack：`ttf-hack`
+- DejaVu：`ttf-dejavu`
+- Meslo：`ttf-meslo-nerd`
+
+## 2 解决网络访问问题
+
+### 2.1 更换官方软件仓库的镜像源
 
 为了提高软件包的下载速度，可以更换官方软件仓库的镜像源。
 在 `/etc/pacman.d/mirrorlist` 文件的开头添加以下内容：
@@ -19,9 +43,9 @@ draft: false
 Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
 ```
 
-### 1.2 GitHub 访问速度慢
+### 2.2 GitHub 访问速度慢
 
-#### 1.2.1 修改 `/etc/hosts` 文件
+#### 2.2.1 修改 `/etc/hosts` 文件
 
 在不使用网络代理的情况下，可以通过修改 `/etc/hosts` 文件的方法，解决 GitHub 访问速度慢的问题。
 
@@ -34,53 +58,25 @@ Server = https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch
 sudo sh -c 'sed -i "/# GitHub520 Host Start/Q" /etc/hosts && curl https://raw.hellogithub.com/hosts >> /etc/hosts'
 ```
 
-#### 1.2.2 使用 GitHub 镜像
+#### 2.2.2 使用 GitHub 镜像
 
-如果修改 `/etc/hosts` 文件后，仍然无法解决 GitHub 访问速度慢的问题，可以考虑使用 GitHub 的镜像。
-GitHub 的镜像网站数量较多，可以自行搜索，并根据镜像网站的说明操作。
+如果修改 `/etc/hosts` 文件后，仍然无法解决 GitHub 访问速度慢的问题，可以考虑使用 GitHub 的镜像。GitHub 的镜像网站数量较多，可以自行搜索，并根据镜像网站的说明操作。
 
-#### 1.2.3 使用网络代理
+#### 2.2.3 使用网络代理
 
 通过以上两种方法，可以在无法使用网络代理的情况下，解决 GitHub 访问速度慢的问题。
 而如果可以正常地使用网络代理，则该问题将不复存在。
 
-### 1.3 配置网络代理
+### 2.3 配置网络代理
 
 首先，需要下载和安装网络代理软件。要完成这一步操作，可以考虑多种方法：
 
 - 如果该软件在 Arch Linux 的官方软件仓库中，可以直接使用 `pacman` 命令进行安装；
 - 如果该软件在 AUR (Arch User Repository) 中，因为 AUR 在中国大陆无法直接访问，所以考虑通过多种方法获得软件包的构建文件，然后手动构建和安装。
 
-安装完成后，还需要进行配置，才能正常地使用网络代理。
+安装完成后，还需要进行配置，才能正常地使用网络代理。以下分别通过安装 `clash` 和 `clash-verge-rev-bin` 的例子，进行更详细的说明。
 
-以下分别通过安装 `clash` 和 `clash-verge-rev` 的例子，进行更详细的说明。
-
-#### 1.3.1 设置系统代理
-
-通过设置环境变量的方法，可以设置系统代理。具体细节可以参考：[Environment variables](https://wiki.archlinux.org/title/Environment_variables)、[Proxy server](https://wiki.archlinux.org/title/Proxy_server)。
-
-例如，可以在 `~/.zprofile` 文件中，添加以下内容：
-
-```
-export http_proxy="http://127.0.0.1:7890"
-export https_proxy="http://127.0.0.1:7890"
-export all_proxy="socks5://127.0.0.1:7890"
-```
-
-要取消设置系统代理，可以使用以下命令：
-
-```
-unset http_proxy
-unset https_proxy
-unset all_proxy
-```
-
-需要注意的是，这种取消方法只在当前终端会话中有效。
-如果需要永久取消设置系统代理，可以移除或注释 `~/.zprofile` 文件中的相关内容，并重新登录。
-
-为了更方便地管理系统代理，在 [dotfiles](https://github.com/peoxin/dotfiles) 中编写了相关脚本，可供参考。
-
-#### 1.3.2 安装和配置 `clash`
+#### 2.3.1 安装和配置 `clash`
 
 `clash` 被包含在 Arch Linux 的官方软件仓库中，可以使用以下命令进行安装：
 
@@ -134,30 +130,51 @@ WantedBy=multi-user.target
 然后，使用以下命令，管理 `clash` 服务：
 
 ```
-sudo systemctl start clash
+sudo systemctl enable --now clash
 sudo systemctl stop clash
-sudo systemctl enable clash
 sudo systemctl status clash
 ```
 
-#### 1.3.3 安装 `clash-verge-rev`
+#### 2.3.2 设置系统代理
 
-`clash-verge-rev` 未被包含在 Arch Linux 的官方软件仓库中，但在 AUR 中可以找到相应的软件包 `clash-verge-rev-bin`。
+通过设置环境变量的方法，可以设置系统代理。具体细节可以参考：[Environment variables](https://wiki.archlinux.org/title/Environment_variables)、[Proxy server](https://wiki.archlinux.org/title/Proxy_server)。
 
-因为此时无法直接访问 AUR，所以参考 [Arch User Repository](https://wiki.archlinux.org/title/Arch_User_Repository)，可以采用以下方法：
-
-- 在其他设备上下载该软件包的构建文件，然后通过 USB 等方式传输到本机上；
-- 使用 GitHub 上的只读镜像 [aur on GitHub](https://github.com/archlinux/aur)。
-
-获得软件包的构建文件后，可以使用以下命令进行构建和安装：
+例如，可以在 `~/.zprofile` 文件中，添加以下内容：
 
 ```
-makepkg -si
+export http_proxy="http://127.0.0.1:7890"
+export https_proxy="http://127.0.0.1:7890"
+export all_proxy="socks5://127.0.0.1:7890"
+```
+
+要取消设置系统代理，可以使用以下命令：
+
+```
+unset http_proxy
+unset https_proxy
+unset all_proxy
+```
+
+需要注意的是，这种取消方法只在当前终端会话中有效。
+如果需要永久取消设置系统代理，可以移除或注释 `~/.zprofile` 文件中的相关内容，并重新登录。
+
+为了更方便地管理系统代理，在 [dotfiles](https://github.com/peoxin/dotfiles) 中编写了相关脚本，可供参考。
+
+#### 2.3.3 安装 `clash-verge-rev-bin`
+
+`clash-verge-rev-bin` 软件包位于 AUR 中。因为此时无法直接访问 AUR，所以参考 [Arch User Repository](https://wiki.archlinux.org/title/Arch_User_Repository)，可以采用以下方法：
+
+- 在其他设备上下载该软件包的构建文件，然后通过 USB 等方式传输到本机上；
+- 使用 GitHub 上的只读镜像 [aur on GitHub](https://github.com/archlinux/aur)。使用以下命令获得软件包的构建文件，并进行构建和安装：
+
+```
+git clone --branch package_name --single-branch https://github.com/archlinux/aur.git package_name
+cd package_name && makepkg -si
 ```
 
 需要注意的是，在这一过程中，可能会依赖对于 GitHub 等网站的访问，所以需要提前解决访问 GitHub 的问题。
 
-#### 1.3.4 其他细节
+#### 2.3.4 其他细节
 
 测试能否连接外网，可以使用以下命令：
 
@@ -171,7 +188,7 @@ curl https://www.google.com
 sudo timedatectl set-ntp true
 ```
 
-## 2 安装 AUR 助手
+## 3 安装 AUR 助手
 
 AUR 助手可以帮助用户更方便地安装和管理软件包，包括 AUR 中的软件包。
 使用 AUR 助手后，可以不用再手动下载和构建 AUR 软件包，而是使用类似于 `pacman` 的命令进行安装。
@@ -182,8 +199,50 @@ AUR 助手本身，也是 AUR 中的软件包，需要通过手动构建的方�
 
 ```
 git clone https://aur.archlinux.org/paru.git
-cd paru
-makepkg -si
+cd paru && makepkg -si
 ```
 
 安装完成后，使用 `paru` 代替原来的 `pacman`，即可使用 AUR 助手。
+
+## 4 输入法配置
+
+首先，安装输入法框架 `fcitx5`:
+
+```
+sudo pacman -S fcitx5-im
+```
+
+然后，设置环境变量：
+
+```
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export SDL_IM_MODULE=fcitx
+export GLFW_IM_MODULE=ibus
+export XMODIFIERS=@im=fcitx
+```
+
+最后，安装输入法引擎和输入法。主要有两种选择：
+
+- fcitx5-chinese-addons
+
+```
+sudo pacman -S fcitx5-chinese-addons
+```
+
+- rime
+
+```
+sudo pacman -S fcitx5-rime
+
+# 以下输入法选择其一即可
+sudo pacman -S rime-double-pinyin
+paru -S rime-flypy
+paru -S rime-ice-git
+```
+
+## 5 安装显卡驱动
+
+如果没有使用独立显卡，可以跳过这一步。
+
+如果使用 NVIDIA 显卡，参考 [NVIDIA - ArchWiki](https://wiki.archlinux.org/title/NVIDIA) 和 [NVidia - Hyprland](https://wiki.hyprland.org/Nvidia) 来安装驱动。
