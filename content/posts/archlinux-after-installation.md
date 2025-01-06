@@ -241,8 +241,39 @@ paru -S rime-flypy
 paru -S rime-ice-git
 ```
 
+此外，安装 `catppuccin` 主题：
+
+```
+cd ~/.local/share/fcitx5
+git clone https://github.com/catppuccin/fcitx5.git catppuccin
+mv catppuccin/src themes && rm -rf catppuccin
+```
+
 ## 5 安装显卡驱动
 
 如果没有使用独立显卡，可以跳过这一步。
 
-如果使用 NVIDIA 显卡，参考 [NVIDIA - ArchWiki](https://wiki.archlinux.org/title/NVIDIA) 和 [NVidia - Hyprland](https://wiki.hyprland.org/Nvidia) 来安装驱动。
+如果使用 NVIDIA 显卡，参考 [NVIDIA - ArchWiki](https://wiki.archlinux.org/title/NVIDIA) 和 [NVidia - Hyprland](https://wiki.hyprland.org/Nvidia) 来安装驱动。对于 Turing 架构及更新的显卡，可以安装以下软件包：
+
+```
+sudo pacman -S nvidia-open-dkms nvidia-utils lib32-nvidia-utils egl-wayland
+sudo pacman -S dkms linux-headers
+```
+
+然后，编辑 `/etc/mkinitcpio.conf` 文件，将以下内容添加到 `MODULES=()` 中：
+
+```
+MODULES=(... nvidia nvidia_modeset nvidia_uvm nvidia_drm ...)
+```
+
+此外，还需要将 `HOOKS` 列表中的 `kms` 移除。然后，创建 `/etc/modprobe.d/nvidia.conf` 文件，添加以下内容：
+
+```
+options nvidia_drm modeset=1 fbdev=1
+```
+
+最后，重新生成 `initramfs` 并重启系统：
+
+```
+sudo mkinitcpio -P
+```
