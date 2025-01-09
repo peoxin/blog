@@ -23,6 +23,7 @@ draft: false
 符号字体：
 
 - Nerd：`ttf-nerd-fonts-symbols`
+- Font Awesome：`ttf-font-awesome`
 
 编程字体：
 
