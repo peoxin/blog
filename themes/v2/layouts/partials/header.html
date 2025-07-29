@@ -1,26 +1,30 @@
-<!DOCTYPE html>
+<!doctype html>
+<!-- prettier-ignore -->
 <html lang="{{ .Site.LanguageCode }}">
   <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="{{ .Site.BaseURL }}favicon.ico" />
-    <link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.min.css" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-screen-web@1.520.0/style.min.css"
+    />
     {{ with resources.Match "css/*.css" | resources.Concat "style.css" | minify | fingerprint }}
-        <link rel="stylesheet" type="text/css" href="{{ .RelPermalink }}">
+    <link rel="stylesheet" type="text/css" href="{{ .RelPermalink }}" />
     {{ end }}
     {{ if .IsHome }}
-      <title>{{ .Site.Title }}</title>
+    <title>{{ .Site.Title }}</title>
     {{ else }}
-      <title>{{ .Title }} | {{ .Site.Title }}</title>
+    <title>{{ .Title }} | {{ .Site.Title }}</title>
     {{ end }}
   </head>
 
   <body>
     <nav>
-    <ul class="menu">
-      {{ range .Site.Menus.main }}
-      <li><a href="{{ .URL | relURL }}">{{ .Name }}</a></li>
-      {{ end }}
-    </ul>
-    <hr/>
+      <ul class="menu">
+        {{ range .Site.Menus.main }}
+        <li><a href="{{ .URL | relURL }}">{{ .Name }}</a></li>
+        {{ end }}
+      </ul>
+      <hr />
     </nav>
