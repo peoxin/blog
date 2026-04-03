@@ -24,6 +24,7 @@ draft: false
 
 - Nerd：`ttf-nerd-fonts-symbols`
 - Font Awesome：`ttf-font-awesome`
+- Emoji: `noto-fonts-emoji`
 
 编程字体：
 
