@@ -1,8 +1,0 @@
-{{- define "main" }}
-  <h2>{{ .Title }}</h2>
-  <ul class="terms">
-    {{- range .Pages }}
-    {{- partial "page_item.html" . }}
-    {{- end }}
-  </ul>
-{{- end }}

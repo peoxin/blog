@@ -1,0 +1,351 @@
+/* Font */
+:root {
+    --main-font: /* sans-serif by default */
+        -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
+        sans-serif;
+    --font-mono:
+        "JetBrains Mono", "SFMono-Regular", Menlo, "Cascadia Code", Consolas,
+        monospace;
+    --font-serif: "LXGW WenKai Screen", "Songti SC", "SimSun", serif;
+}
+
+[data-font="serif"] {
+    --main-font: var(--font-serif);
+}
+
+/* Light mode color (default) */
+:root {
+    --theme-bg: #fff;
+    --theme-text: #222;
+    --theme-heading: #222;
+    --theme-code-bg: #f7f7f7;
+    --theme-code-text: inherit;
+    --theme-code-border: #e0e0e0;
+    --theme-pre-bg: #f7f7f7;
+    --theme-pre-border: #e0e0e0;
+    --theme-copy-btn-bg: #fff;
+    --theme-copy-btn-text: #666;
+    --theme-copy-btn-border: #ccc;
+    --theme-table-header-bg: #f7f7f7;
+    --theme-table-row-even: #fff;
+    --theme-table-border: #ddd;
+    --theme-math-filter: none;
+    --theme-toggle-btn-bg-hover: #f0f0f0;
+}
+
+/* Dark mode color (if user prefers dark mode and hasn't explicitly set a theme) */
+@media (prefers-color-scheme: dark) {
+    html:not([data-theme]) {
+        --theme-bg: #111;
+        --theme-text: #ddd;
+        --theme-heading: #ddd;
+        --theme-code-bg: #222;
+        --theme-code-text: inherit;
+        --theme-code-border: #3d3d3d;
+        --theme-pre-bg: #222;
+        --theme-pre-border: #3d3d3d;
+        --theme-copy-btn-bg: #333;
+        --theme-copy-btn-text: #ccc;
+        --theme-copy-btn-border: #555;
+        --theme-table-header-bg: #222;
+        --theme-table-row-even: #111;
+        --theme-table-border: #444;
+        --theme-math-filter: invert(1) hue-rotate(180deg);
+        --theme-toggle-btn-bg-hover: #1a1a1a;
+    }
+}
+
+/* Dark mode color (if user explicitly sets dark mode) */
+html[data-theme="dark"] {
+    --theme-bg: #111;
+    --theme-text: #ddd;
+    --theme-heading: #ddd;
+    --theme-code-bg: #222;
+    --theme-code-text: inherit;
+    --theme-code-border: #3d3d3d;
+    --theme-pre-bg: #222;
+    --theme-pre-border: #3d3d3d;
+    --theme-copy-btn-bg: #333;
+    --theme-copy-btn-text: #ccc;
+    --theme-copy-btn-border: #555;
+    --theme-table-header-bg: #222;
+    --theme-table-row-even: #111;
+    --theme-table-border: #444;
+    --theme-math-filter: invert(1) hue-rotate(180deg);
+    --theme-toggle-btn-bg-hover: #1a1a1a;
+}
+
+html {
+    background: var(--theme-bg);
+    color: var(--theme-text);
+    font-size: 17px;
+    line-height: 1.7;
+}
+
+body {
+    font-family: var(--main-font);
+    transition: font-family 0.3s ease;
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    margin: 0;
+}
+
+/* Main content area */
+article {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1rem 1rem;
+}
+
+/* Heading */
+h2 {
+    text-align: center; /* typst h1 -> html h2 */
+    font-size: 2.5rem;
+    line-height: 2;
+}
+
+section h2 {
+    /* h2 wrapperd in section, treat as h3, e.g. bibliography */
+    text-align: left;
+    font-size: 1.4rem;
+    line-height: 1.5;
+    margin-top: 1.5em;
+}
+
+h3 {
+    font-size: 1.4rem;
+    line-height: 1.5;
+    margin-top: 1.5em;
+}
+
+h4 {
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+h5 {
+    font-size: 1rem;
+    line-height: 1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: var(--theme-heading);
+}
+
+/* Paragraph and list */
+p,
+ul,
+ol {
+    margin: 1em 0;
+}
+
+section ul {
+    /* ul wrapped in section: bibliography */
+    padding: 0;
+}
+
+/* Link */
+a,
+a:link,
+a:visited {
+    color: inherit;
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+}
+
+/* Code block */
+pre,
+code {
+    font-family: var(--font-mono);
+}
+
+code {
+    font-size: 0.9em;
+    background: var(--theme-code-bg);
+    color: var(--theme-code-text);
+    border: 1px solid var(--theme-code-border);
+    border-radius: 4px;
+    padding: 0.2em 0.4em;
+}
+
+pre {
+    background: var(--theme-pre-bg);
+    border: 1px solid var(--theme-pre-border);
+    border-radius: 4px;
+    padding: 0.5em 1em;
+    overflow-x: auto;
+    position: relative;
+    line-height: 1.4;
+}
+pre > code {
+    color: var(--theme-code-text);
+    background: none;
+    border: none;
+    padding: 0;
+}
+
+.code-copy-btn {
+    position: absolute;
+    top: 0.6em;
+    right: 0.6em;
+    font-size: 0.9em;
+    background-color: var(--theme-copy-btn-bg);
+    color: var(--theme-copy-btn-text);
+    border: 1px solid var(--theme-copy-btn-border);
+    border-radius: 3px;
+    opacity: 0;
+    transition:
+        opacity 0.2s ease-in-out,
+        visibility 0.2s;
+    visibility: hidden;
+    font-family: var(--main-font);
+}
+
+pre:hover .code-copy-btn {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Table */
+table {
+    font-size: 0.95em;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+table th,
+table td {
+    border: 1px solid var(--theme-table-border);
+    padding: 0.5em 1em;
+}
+
+table th,
+table thead td {
+    background-color: var(--theme-table-header-bg);
+    font-weight: bold;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: var(--theme-table-row-even);
+}
+
+/* Figure */
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+svg {
+    display: block;
+    margin: 0 auto;
+}
+
+figcaption {
+    text-align: center;
+    font-size: 0.9em;
+    color: var(--theme-text);
+    margin-top: 0.5em;
+}
+
+/* Math */
+[role="math"] {
+    text-align: center;
+    filter: var(--theme-math-filter);
+}
+
+/* Blockquote */
+blockquote {
+    background: var(--theme-code-bg);
+    border-left: 5px solid var(--theme-code-border);
+    padding: 0.5em 1em;
+    margin: 1em 0;
+}
+
+/* Date */
+.pub-mod-date {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.5rem;
+}
+
+.pub-date,
+.mod-date {
+    font-style: italic;
+    font-size: 0.95rem;
+    color: color-mix(in srgb, var(--theme-text), transparent 40%);
+}
+
+/* Header */
+header {
+    max-width: 800px;
+    width: 100%;
+    margin: 1rem auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav {
+    display: flex;
+    font-size: 1.2rem;
+    gap: 1em;
+    margin-right: auto;
+}
+
+.theme-toggle-btn {
+    width: 1.8rem;
+    height: 1.8rem;
+    background: none;
+    border: none;
+    border-radius: 1rem;
+    transition: background-color 0.15s;
+    cursor: pointer;
+    color: var(--theme-text);
+    margin: 0 0.5rem;
+}
+
+.theme-toggle-btn svg {
+    width: 1.6rem;
+    height: 1.6rem;
+}
+
+.theme-toggle-btn:hover {
+    background-color: var(--theme-toggle-btn-bg-hover);
+}
+
+.font-toggle-btn {
+    width: 2.6rem;
+    height: 1.8rem;
+    background: none;
+    border: none;
+    border-radius: 1rem;
+    transition: background-color 0.15s;
+    cursor: pointer;
+    color: var(--theme-text);
+    font-size: 1rem;
+    margin: 0 0.5rem;
+}
+
+.font-toggle-btn:hover {
+    background-color: var(--theme-toggle-btn-bg-hover);
+}
+
+.font-toggle-btn.is-serif {
+    font-family: var(--font-serif);
+}
+
+/* Footer */
+footer {
+    width: 100%;
+    text-align: center;
+    margin: 1rem 0;
+    padding-top: 2rem;
+    font-size: 1em;
+}
