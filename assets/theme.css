@@ -291,6 +291,10 @@ blockquote {
     color: color-mix(in srgb, var(--theme-text), transparent 40%);
 }
 
+.mod-date {
+    margin-top: -0.15em; /* better visual align */
+}
+
 /* Header */
 header {
     max-width: 800px;
