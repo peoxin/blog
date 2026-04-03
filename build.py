@@ -23,6 +23,7 @@ from livereload import Server as LiveReloadServer
 class BlogConfig:
     site_title: str
     site_url: str
+    site_base_path: str
     site_description: str
     author: str
     content_dir: Path
@@ -35,6 +36,7 @@ class BlogConfig:
 cfg = BlogConfig(
     site_title="Peoxin's Blog",
     site_url="https://peoxin.github.io/blog",
+    site_base_path="/blog",
     site_description="Personal blog by peoxin",
     author="peoxin",
     content_dir=Path("content"),
@@ -470,7 +472,7 @@ def inject_seo_rss_tags(output_html: Path) -> bool:
             rss_title = site_title or title
             append_link(
                 rel="alternate",
-                href="/feed.xml",
+                href=f"{cfg.site_base_path}/feed.xml" if args.deploy else "/feed.xml",
                 type_value="application/rss+xml",
                 title_value=f"{rss_title} RSS Feed",
             )
@@ -890,6 +892,8 @@ def build_html(
             ".",
             "--font-path",
             str(cfg.assets_dir),
+            "--input",
+            f"base-path={cfg.site_base_path if args.deploy else ''}",
             "--features",
             "html",
             "--format",
@@ -935,6 +939,8 @@ def build_pdf(
             ".",
             "--font-path",
             str(cfg.assets_dir),
+            "--input",
+            f"base-path={cfg.site_base_path if args.deploy else ''}",
             str(typ_file),
             str(output_path),
         ]
@@ -989,6 +995,12 @@ def create_parser() -> argparse.ArgumentParser:
         type=int,
         default=8000,
         help="Preview server port (default: 8000)",
+    )
+
+    parser.add_argument(
+        "--deploy",
+        action="store_true",
+        help="Build for deployment (GitHub Pages)",
     )
 
     return parser

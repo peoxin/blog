@@ -56,6 +56,15 @@
   }
 }
 
+#let base-path = sys.inputs.at("base-path", default: "")
+#let site-path(path) = {
+  if base-path != "" {
+    base-path + path
+  } else {
+    path
+  }
+}
+
 #let post(
   title: "",
   pub-date: none,
@@ -78,21 +87,21 @@
         html.title(title)
         html.meta(name: "pub-date", content: format-date(pub-date))
         html.meta(name: "mod-date", content: format-date(mod-date))
-        html.link(rel: "icon", href: "/assets/favicon.ico")
+        html.link(rel: "icon", href: site-path("/assets/favicon.ico"))
 
         web-font()
 
         let css-links = (
-          "/assets/theme.css",
+          site-path("/assets/theme.css"),
         )
         for css-link in css-links.dedup() {
           html.link(rel: "stylesheet", href: css-link)
         }
 
         let js-scripts = (
-          "/assets/code-block.js",
-          "/assets/toggle-font.js",
-          "/assets/toggle-theme.js",
+          site-path("/assets/code-block.js"),
+          site-path("/assets/toggle-font.js"),
+          site-path("/assets/toggle-theme.js"),
         )
         for js-src in js-scripts.dedup() {
           html.script(src: js-src)
@@ -102,7 +111,7 @@
       html.body({
         // Navigation bar
         let nav-links = (
-          "/": "Home",
+          site-path("/"): "Home",
         )
         html.header(
           html.nav(
@@ -123,7 +132,7 @@
           none
         }
         html.article(
-          content + html.div(class: "pub-mod-date", pub-date-elem + mod-date-elem)
+          content + html.div(class: "pub-mod-date", pub-date-elem + mod-date-elem),
         )
 
         html.footer([2026 #sym.copyright peoxin])

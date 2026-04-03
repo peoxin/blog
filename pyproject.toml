@@ -1,10 +1,9 @@
 [project]
-name = "blog-typst"
+name = "peoxin-blog"
 version = "0.1.0"
 requires-python = ">=3.10"
 dependencies = [
     "beautifulsoup4>=4.14.3",
     "livereload>=2.7.1",
     "lxml>=6.0.2",
-    "pyinstrument>=5.1.2",
 ]
