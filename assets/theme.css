@@ -304,7 +304,7 @@ header {
 
 header nav {
     display: flex;
-    font-size: 1.2rem;
+    font-size: 1rem;
     gap: 1em;
     margin-right: auto;
 }
