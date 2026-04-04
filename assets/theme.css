@@ -78,7 +78,6 @@ html[data-theme="dark"] {
 html {
     background: var(--theme-bg);
     color: var(--theme-text);
-    font-size: 17px;
     line-height: 1.7;
 }
 
@@ -289,10 +288,6 @@ blockquote {
     font-style: italic;
     font-size: 0.95rem;
     color: color-mix(in srgb, var(--theme-text), transparent 40%);
-}
-
-.mod-date {
-    margin-top: -0.1em; /* better visual align */
 }
 
 /* Header */
